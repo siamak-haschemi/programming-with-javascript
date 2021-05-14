@@ -8,7 +8,7 @@ export interface CounterState {
 }
 
 const initialState: CounterState = {
-  value: 0,
+  counter: 0,
   status: 'idle',
 };
 
