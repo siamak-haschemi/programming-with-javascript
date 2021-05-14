@@ -5,6 +5,7 @@ import {
   increment,
   decrement,
   incrementByAmount,
+  incrementByAmountAsync,
   selectCount
 } from "./counterSlice";
 
@@ -16,12 +17,28 @@ function Counter() {
   return (
       <div className="Counter">
         <div>
-          <button onClick={() => dispatch(increment())}>{count}</button>
-
+          <span>Current Value: {count}</span>
+          <br/>
+          <br/>
+          <button onClick={() => dispatch(increment())}>Increment</button>
+          <button onClick={() => dispatch(decrement())}>Decrement</button>
+          <br/>
+          <br/>
+          <span>Increment by value:</span>
+          <br/>
           <input
               onChange={e => setIncrementByValue(Number(e.target.value))}/>
           <button onClick={() => dispatch(
               incrementByAmount(Number(incrementByValue)))}>Send
+          </button>
+          <br/>
+          <br/>
+          <span>Increment by value (async):</span>
+          <br/>
+          <input
+              onChange={e => setIncrementByValue(Number(e.target.value))}/>
+          <button onClick={() => dispatch(
+              incrementByAmountAsync(Number(incrementByValue)))}>Send
           </button>
         </div>
       </div>
