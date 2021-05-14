@@ -19,6 +19,7 @@ const users = [{
 
 module.exports = {
   authenticate,
+  logout,
   getAll
 };
 
@@ -37,6 +38,11 @@ async function authenticate({username, password}) {
     ...omitPassword(user),
     token
   };
+}
+
+async function logout(user) {
+  console.log("logout: {}", user);
+  return {};
 }
 
 async function getAll() {

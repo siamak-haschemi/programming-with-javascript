@@ -9,50 +9,52 @@ import {
   incrementByAmountAsync,
   selectCount
 } from "./counterSlice";
+import {selectUser} from "../auth/authSlice";
 
 function Counter() {
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const count = useSelector(selectCount);
   const [incrementByValue, setIncrementByValue] = useState(0)
 
-  return (
-      <div className="Counter">
-        <div>
-          <span>Current Value: {count}</span>
-        </div>
+  return (!user ? <div>Please login!</div> :
+          <div className="Counter">
+            <div>
+              <span>Current Value: {count}</span>
+            </div>
 
-        <div>
-          <button onClick={() => dispatch(increment())}>+</button>
-          <button onClick={() => dispatch(decrement())}>-</button>
-          <button onClick={() => dispatch(reset())}>Reset</button>
-        </div>
+            <div>
+              <button onClick={() => dispatch(increment())}>+</button>
+              <button onClick={() => dispatch(decrement())}>-</button>
+              <button onClick={() => dispatch(reset())}>Reset</button>
+            </div>
 
-        <br/>
+            <br/>
 
-        <div>
-          <span>Increment by value:</span>
-          <br/>
-          <input
-              value={incrementByValue}
-              onChange={e => setIncrementByValue(Number(e.target.value))}/>
-          <button onClick={() => dispatch(
-              incrementByAmount(Number(incrementByValue)))}>Send
-          </button>
-        </div>
+            <div>
+              <span>Increment by value:</span>
+              <br/>
+              <input
+                  value={incrementByValue}
+                  onChange={e => setIncrementByValue(Number(e.target.value))}/>
+              <button onClick={() => dispatch(
+                  incrementByAmount(Number(incrementByValue)))}>Send
+              </button>
+            </div>
 
-        <br/>
+            <br/>
 
-        <div>
-          <span>Increment by value (async):</span>
-          <br/>
-          <input
-              value={incrementByValue}
-              onChange={e => setIncrementByValue(Number(e.target.value))}/>
-          <button onClick={() => dispatch(
-              incrementByAmountAsync(Number(incrementByValue)))}>Send
-          </button>
-        </div>
-      </div>
+            <div>
+              <span>Increment by value (async):</span>
+              <br/>
+              <input
+                  value={incrementByValue}
+                  onChange={e => setIncrementByValue(Number(e.target.value))}/>
+              <button onClick={() => dispatch(
+                  incrementByAmountAsync(Number(incrementByValue)))}>Send
+              </button>
+            </div>
+          </div>
   );
 }
 

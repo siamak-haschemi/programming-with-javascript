@@ -1,5 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit'
 import counterReducer from '../features/counter/counterSlice'
+import authReducer from '../features/auth/authSlice'
+
 import {
   loadStateFromLocalStorage,
   saveStateToLocalStorage
@@ -12,6 +14,7 @@ const loadedStateFromLocalStorage = loadStateFromLocalStorage();
 let store = configureStore({
   reducer: {
     counter: counterReducer,
+    auth: authReducer
   },
   middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(counterMiddleware),
