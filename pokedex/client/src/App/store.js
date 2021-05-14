@@ -1,9 +1,22 @@
 import {configureStore} from '@reduxjs/toolkit'
 import counterReducer from '../features/counter/counterSlice'
-//import thunk from 'redux-thunk'
+import {
+  loadStateFromLocalStorage,
+  saveStateToLocalStorage
+} from "./localStorage";
 
-export default configureStore({
+const loadedStateFromLocalStorage = loadStateFromLocalStorage();
+
+let store = configureStore({
   reducer: {
-    counter: counterReducer
-  }
+    counter: counterReducer,
+  },
+  preloadedState: loadedStateFromLocalStorage
 });
+
+// subscribe to changes and persist them.
+store.subscribe(() => {
+  saveStateToLocalStorage(store.getState());
+});
+
+export default store;
