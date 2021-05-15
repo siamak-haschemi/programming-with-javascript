@@ -2,7 +2,11 @@ export const loginService = (credentials, thunkAPI) => {
 
   const requestOptions = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + window.btoa(
+          credentials.username + ':' + credentials.password)
+    },
     body: JSON.stringify(credentials)
   };
 

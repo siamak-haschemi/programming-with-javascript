@@ -23,7 +23,11 @@ module.exports = {
   getAll
 };
 
-async function authenticate({username, password}) {
+async function authenticate(req) {
+
+  const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
+  const [username, password] = Buffer.from(b64auth, 'base64').toString().split(':')
+
   const user = users.find(
       u => u.username === username && u.password === password);
 
@@ -31,8 +35,8 @@ async function authenticate({username, password}) {
     throw 'Username or password is incorrect';
   }
 
-  // create a jwt token that is valid for 7 days
-  const token = jwt.sign({sub: user.id}, config.secret, {expiresIn: '7d'});
+  // create a jwt token that is valid for 1 day
+  const token = jwt.sign({sub: user.id}, config.secret, {expiresIn: '1d'});
 
   return {
     ...omitPassword(user),
