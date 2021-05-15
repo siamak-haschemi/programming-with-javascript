@@ -24,7 +24,3 @@ export const saveStateToLocalStorage = (state) => {
     // ignore write errors
   }
 };
-
-export const deleteFromLocalStorage = () => {
-  saveStateToLocalStorage(undefined);
-};

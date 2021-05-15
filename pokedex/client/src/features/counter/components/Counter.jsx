@@ -8,8 +8,8 @@ import {
   incrementByAmount,
   incrementByAmountAsync,
   selectCount
-} from "./counterSlice";
-import {selectUser} from "../auth/authSlice";
+} from "../counterSlice";
+import {selectUser} from "../../auth/authSlice";
 
 function Counter() {
   const user = useSelector(selectUser);
@@ -17,7 +17,9 @@ function Counter() {
   const count = useSelector(selectCount);
   const [incrementByValue, setIncrementByValue] = useState(0)
 
-  return (!user ? <div>Please login!</div> :
+  return (!user ?
+          <div>Please login!</div>
+          :
           <div className="Counter">
             <div>
               <span>Current Value: {count}</span>

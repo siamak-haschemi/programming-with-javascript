@@ -3,15 +3,17 @@ import {useSelector, useDispatch} from "react-redux";
 
 import {
   login, logout, selectUser
-} from "./authSlice";
+} from "../authSlice";
 
-function Login() {
+function Auth() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  return (user ? <button onClick={() => dispatch(logout(user))}>Logout</button> :
+  return (user ?
+          <button onClick={() => dispatch(logout(user))}>Logout</button>
+          :
           <div className="Login">
             <div>
               <span>Login:</span>
@@ -29,4 +31,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Auth;

@@ -1,15 +1,10 @@
-import Counter from "./features/counter/Counter";
-import Login from "./features/auth/Login";
-
-import {useSelector} from "react-redux";
-import {selectUser} from "./features/auth/authSlice";
+import Counter from "./features/counter/components/Counter";
+import Auth from "./features/auth/components/Auth";
 
 function App() {
-  const user = useSelector(selectUser);
-
   return (
       <div className="App">
-        <Login/>
+        <Auth/>
         <hr/>
         <Counter/>
       </div>

@@ -1,45 +1,14 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import {loginService, logoutService} from "./service/UserService";
 
 export const login = createAsyncThunk(
     'auth/login',
-    async (credentials, thunkAPI) => {
-
-      const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(credentials)
-      };
-
-      return fetch(`http://localhost:4000/users/authenticate`, requestOptions)
-      .then(response => {
-        if (!response.ok) {
-          return null;
-        }
-        return response.json()
-      });
-    }
+    async (credentials, thunkAPI) => loginService(credentials, thunkAPI)
 );
 
 export const logout = createAsyncThunk(
     'auth/logout',
-    async (user, thunkAPI) => {
-
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + user.token
-        }
-      };
-
-      return fetch(`http://localhost:4000/users/logout`, requestOptions)
-      .then(response => {
-        if (!response.ok) {
-          return null;
-        }
-        return response.json()
-      });
-    }
+    async (user, thunkAPI) => logoutService(user, thunkAPI)
 );
 
 let authSlice = createSlice({
