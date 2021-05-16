@@ -49,10 +49,6 @@ async function logout(user) {
   return {};
 }
 
-async function getAll() {
-  return users.map(u => omitPassword(u));
-}
-
 // helper functions
 
 function omitPassword(user) {
