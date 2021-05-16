@@ -11,8 +11,6 @@ import {
   selectAuth,
   AuthStatus
 } from "../../auth/AuthSlice";
-import Welcome from "../../auth/components/Welcome";
-import Login from "../../auth/components/Login";
 
 function Counter() {
   const auth = useSelector(selectAuth);

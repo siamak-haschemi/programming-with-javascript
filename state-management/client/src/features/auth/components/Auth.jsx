@@ -4,7 +4,7 @@ import {selectAuth, AuthStatus} from "../AuthSlice";
 import Login from "./Login";
 import Welcome from "./Welcome";
 
-function AuthHeader() {
+function Auth() {
   const auth = useSelector(selectAuth);
 
   const renderSwitch = (currentStatus) => {
@@ -20,9 +20,9 @@ function AuthHeader() {
     }
   };
 
-  return (<div className="AuthHeader">{
+  return (<div className="Auth">{
     renderSwitch(auth.currentStatus)
   }</div>)
 };
 
-export default AuthHeader;
+export default Auth;

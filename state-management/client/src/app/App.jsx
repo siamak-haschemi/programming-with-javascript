@@ -1,11 +1,11 @@
 import './App.css';
 import Counter from "../features/counter/components/Counter";
-import AuthHeader from "../features/auth/components/AuthHeader";
+import Auth from "../features/auth/components/Auth";
 
 function App() {
   return (
       <div className="App">
-        <AuthHeader/>
+        <Auth/>
         <hr/>
         <Counter/>
       </div>
