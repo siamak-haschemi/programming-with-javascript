@@ -9,15 +9,15 @@ import {
   incrementByAmountAsync,
   selectCount
 } from "../counterSlice";
-import {selectUser} from "../../auth/authSlice";
+import {selectAuth} from "../../auth/authSlice";
 
 function Counter() {
-  const user = useSelector(selectUser);
+  const auth = useSelector(selectAuth);
   const dispatch = useDispatch();
   const count = useSelector(selectCount);
   const [incrementByValue, setIncrementByValue] = useState(0)
 
-  return (!user ?
+  return (!auth.user ?
           <div>Please login!</div>
           :
           <div className="Counter">

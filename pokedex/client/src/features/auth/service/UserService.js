@@ -1,4 +1,4 @@
-export const loginService = (credentials, thunkAPI) => {
+export const loginService = (credentials, rejectWithValue) => {
 
   const requestOptions = {
     method: 'POST',
@@ -13,13 +13,13 @@ export const loginService = (credentials, thunkAPI) => {
   return fetch(`http://localhost:4000/users/authenticate`, requestOptions)
   .then(response => {
     if (!response.ok) {
-      return null;
+      return rejectWithValue(response);
     }
     return response.json()
   });
 };
 
-export const logoutService = (user, thunkAPI) => {
+export const logoutService = (user, rejectWithValue) => {
 
   const requestOptions = {
     method: 'POST',
@@ -32,7 +32,7 @@ export const logoutService = (user, thunkAPI) => {
   return fetch(`http://localhost:4000/users/logout`, requestOptions)
   .then(response => {
     if (!response.ok) {
-      return null;
+      return rejectWithValue(response);
     }
     return response.json()
   });
