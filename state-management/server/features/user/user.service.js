@@ -24,6 +24,8 @@ module.exports = {
 
 async function authenticate(req) {
 
+  await sleep(2000);
+
   const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
   const [username, password] = Buffer.from(b64auth, 'base64').toString().split(':')
 
@@ -37,6 +39,8 @@ async function authenticate(req) {
   // create a jwt token that is valid for 1 day
   const token = jwt.sign({sub: user.id}, config.secret, {expiresIn: '1d'});
 
+
+
   return {
     ...omitPassword(user),
     token
@@ -45,6 +49,9 @@ async function authenticate(req) {
 
 async function logout(user) {
   console.log("logout: {}", user);
+
+  await sleep(2000);
+
   return {};
 }
 
@@ -53,4 +60,10 @@ async function logout(user) {
 function omitPassword(user) {
   const {password, ...userWithoutPassword} = user;
   return userWithoutPassword;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }

@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import {incrementByValueService, resetService} from "./service/CounterService";
-import {StatusValues} from "../auth/AuthSlice";
+import {AuthStatus} from "../auth/AuthSlice";
 
 export const incrementByValue = createAsyncThunk(
     'counter/incrementByValue',
@@ -10,7 +10,7 @@ export const incrementByValue = createAsyncThunk(
         rejectWithValue),
     {
       condition: (value, {getState}) => {
-        return getState().auth.currentStatus === StatusValues.loginSucceeded;
+        return getState().auth.currentStatus === AuthStatus.loginSucceeded;
       }
     }
 );
@@ -22,7 +22,7 @@ export const reset = createAsyncThunk(
         rejectWithValue),
     {
       condition: (value, {getState}) => {
-        return getState().auth.currentStatus === StatusValues.loginSucceeded;
+        return getState().auth.currentStatus === AuthStatus.loginSucceeded;
       }
     }
 );

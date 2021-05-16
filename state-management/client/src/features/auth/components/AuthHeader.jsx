@@ -1,26 +1,28 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {selectAuth, StatusValues} from "../AuthSlice";
+import {selectAuth, AuthStatus} from "../AuthSlice";
 import Login from "./Login";
 import Welcome from "./Welcome";
 
 function AuthHeader() {
   const auth = useSelector(selectAuth);
 
-  return (<div className="AuthHeader">
-        {
-          auth.currentStatus === StatusValues.loginFailed ?
-              <span>Login failed!</span>
-              :
-              <span/>
-        }
+  const renderSwitch = (currentStatus) => {
+    switch (currentStatus) {
+      case AuthStatus.loginPending:
+        return <div><b>Try to login ...</b></div>;
+      case AuthStatus.logoutPending:
+        return <div><b>Try to logout ...</b></div>;
+      case AuthStatus.loginSucceeded:
+        return <Welcome/>;
+      default:
+        return <Login/>;
+    }
+  };
 
-        {auth.currentStatus === StatusValues.loginSucceeded ?
-            <Welcome/> :
-            <Login/>
-        }
-      </div>
-  )
+  return (<div className="AuthHeader">{
+    renderSwitch(auth.currentStatus)
+  }</div>)
 };
 
 export default AuthHeader;

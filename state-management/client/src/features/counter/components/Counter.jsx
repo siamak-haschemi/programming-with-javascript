@@ -9,30 +9,40 @@ import {
 
 import {
   selectAuth,
-  StatusValues
+  AuthStatus
 } from "../../auth/AuthSlice";
+import Welcome from "../../auth/components/Welcome";
+import Login from "../../auth/components/Login";
 
 function Counter() {
   const auth = useSelector(selectAuth);
   const dispatch = useDispatch();
   const counter = useSelector(selectCounter);
 
-  return (
-      auth.currentStatus !== StatusValues.loginSucceeded ?
-          <div>Please login!</div>
-          :
-          <div className="Counter">
-            <div>
-              <span>Current Value: {counter.value}</span>
-            </div>
+  const renderSwitch = (currentStatus) => {
+    switch (currentStatus) {
+      case AuthStatus.loginSucceeded:
 
-            <div>
-              <button onClick={() => dispatch(incrementByValue(1))}>+</button>
-              <button onClick={() => dispatch(incrementByValue(-1))}>-</button>
-              <button onClick={() => dispatch(reset())}>x</button>
-            </div>
+        return <div className="Counter">
+          <div>
+            <span>Current Value: {counter.value}</span>
           </div>
-  );
+
+          <div>
+            <button onClick={() => dispatch(incrementByValue(1))}>+</button>
+            <button onClick={() => dispatch(incrementByValue(-1))}>-</button>
+            <button onClick={() => dispatch(reset())}>x</button>
+          </div>
+        </div>;
+
+      default:
+        return <div>Please login!</div>;
+    }
+  };
+
+  return (<div className="Counter">{
+    renderSwitch(auth.currentStatus)
+  }</div>)
 }
 
 export default Counter;
