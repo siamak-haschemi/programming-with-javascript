@@ -1,16 +1,16 @@
-import React, {useState} from "react";
+import React from "react";
 import {useSelector, useDispatch} from "react-redux";
 
 import {
   selectCounter,
   incrementByValue,
   reset,
-} from "../counterSlice";
+} from "../CounterSlice";
 
 import {
   selectAuth,
   StatusValues
-} from "../../auth/authSlice";
+} from "../../auth/AuthSlice";
 
 function Counter() {
   const auth = useSelector(selectAuth);

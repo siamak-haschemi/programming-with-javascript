@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import {incrementByValueService, resetService} from "./service/CounterService";
-import {StatusValues} from "../auth/authSlice";
+import {StatusValues} from "../auth/AuthSlice";
 
 export const incrementByValue = createAsyncThunk(
     'counter/incrementByValue',

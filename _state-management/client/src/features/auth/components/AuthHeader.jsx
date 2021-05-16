@@ -1,6 +1,6 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {selectAuth, StatusValues} from "../authSlice";
+import {selectAuth, StatusValues} from "../AuthSlice";
 import Login from "./Login";
 import Welcome from "./Welcome";
 
