@@ -16,7 +16,9 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk(
     'auth/logout',
-    async (user, {rejectWithValue}) => logoutService(user, rejectWithValue)
+    async (_, {getState, rejectWithValue}) => logoutService(
+        getState().auth.user.token,
+        rejectWithValue)
 );
 
 let authSlice = createSlice({

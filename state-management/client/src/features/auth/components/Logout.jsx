@@ -11,7 +11,7 @@ function Logout() {
         <span>Welcome user: {auth.user.username}</span>
         <br/>
         <button
-            onClick={() => dispatch(logout(auth.user))}>Logout
+            onClick={() => dispatch(logout())}>Logout
         </button>
       </div>
   )

@@ -10,29 +10,29 @@ export const loginService = (credentials, rejectWithValue) => {
     body: JSON.stringify(credentials)
   };
 
-  return fetch(`http://localhost:4000/users/authenticate`, requestOptions)
+  return fetch(`http://localhost:4000/user/authenticate`, requestOptions)
   .then(response => {
     if (!response.ok) {
-      return rejectWithValue(response);
+      return rejectWithValue(response.data);
     }
     return response.json()
   });
 };
 
-export const logoutService = (user, rejectWithValue) => {
+export const logoutService = (token, rejectWithValue) => {
 
   const requestOptions = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + user.token
+      'Authorization': 'Bearer ' + token
     }
   };
 
-  return fetch(`http://localhost:4000/users/logout`, requestOptions)
+  return fetch(`http://localhost:4000/user/logout`, requestOptions)
   .then(response => {
     if (!response.ok) {
-      return rejectWithValue(response);
+      return rejectWithValue(response.data);
     }
     return response.json()
   });
