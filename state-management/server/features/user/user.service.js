@@ -19,8 +19,7 @@ const users = [{
 
 module.exports = {
   authenticate,
-  logout,
-  getAll
+  logout
 };
 
 async function authenticate(req) {

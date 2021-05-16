@@ -16,7 +16,6 @@ function Counter() {
   const auth = useSelector(selectAuth);
   const dispatch = useDispatch();
   const counter = useSelector(selectCounter);
-  const [increment, setIncrement] = useState(0)
 
   return (
       auth.currentStatus !== StatusValues.loginSucceeded ?
@@ -31,19 +30,6 @@ function Counter() {
               <button onClick={() => dispatch(incrementByValue(1))}>+</button>
               <button onClick={() => dispatch(incrementByValue(-1))}>-</button>
               <button onClick={() => dispatch(reset())}>x</button>
-            </div>
-
-            <br/>
-
-            <div>
-              <span>Increment by value:</span>
-              <br/>
-              <input
-                  value={increment}
-                  onChange={e => setIncrement(Number(e.target.value))}/>
-              <button onClick={() => dispatch(
-                  incrementByValue(Number(increment)))}>Send
-              </button>
             </div>
           </div>
   );

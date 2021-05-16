@@ -2,12 +2,12 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {logout, selectAuth} from "../authSlice";
 
-function Logout() {
+function Welcome() {
   const dispatch = useDispatch();
   const auth = useSelector(selectAuth);
 
   return (
-      <div>
+      <div className="Welcome">
         <span>Welcome user: {auth.user.username}</span>
         <br/>
         <button
@@ -17,4 +17,4 @@ function Logout() {
   )
 };
 
-export default Logout;
+export default Welcome;

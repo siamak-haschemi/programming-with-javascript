@@ -2,12 +2,12 @@ import React from "react";
 import {useSelector} from "react-redux";
 import {selectAuth, StatusValues} from "../authSlice";
 import Login from "./Login";
-import Logout from "./Logout";
+import Welcome from "./Welcome";
 
 function AuthHeader() {
   const auth = useSelector(selectAuth);
 
-  return (<div>
+  return (<div className="AuthHeader">
         {
           auth.currentStatus === StatusValues.loginFailed ?
               <span>Login failed!</span>
@@ -16,7 +16,7 @@ function AuthHeader() {
         }
 
         {auth.currentStatus === StatusValues.loginSucceeded ?
-            <Logout/> :
+            <Welcome/> :
             <Login/>
         }
       </div>
