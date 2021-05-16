@@ -1,6 +1,13 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import {loginService, logoutService} from "./service/UserService";
 
+const StatusValues = {
+  initial: 'initial',
+  loginPending: 'loginPending',
+  loginSucceeded: 'loginSucceeded',
+  loginFailed: 'loginFailed',
+}
+
 export const login = createAsyncThunk(
     'auth/login',
     async (credentials, {rejectWithValue}) => loginService(credentials,
@@ -12,46 +19,45 @@ export const logout = createAsyncThunk(
     async (user, {rejectWithValue}) => logoutService(user, rejectWithValue)
 );
 
-const StatusValues = {
-  initial: 'initial',
-  pending: 'pending',
-  fulfilled: 'fulfilled',
-  rejected: 'rejected',
-}
-
 let authSlice = createSlice({
-  name: 'auth',
-  initialState: {
-    currentStatus: 'initial',
-    user: null
-  },
-  extraReducers: {
-    [login.pending]: (state, action) => {
-      if (state.currentStatus === StatusValues.initial
-          || state.currentStatus === StatusValues.fulfilled
-          || state.currentStatus === StatusValues.rejected) {
-        state.currentStatus = 'pending';
-      }
-    },
-    [login.fulfilled]: (state, action) => {
-      if (state.currentStatus === StatusValues.pending) {
-        state.currentStatus = 'fulfilled';
-        state.user = action.payload;
-      }
-    },
-    [login.rejected]: (state, action) => {
-      if (state.currentStatus === StatusValues.pending) {
-        state.currentStatus = StatusValues.rejected;
-        state.user = null;
-      }
-    },
+      name: 'auth',
+      initialState: {
+        currentStatus: StatusValues.initial,
+        user: null
+      },
+      extraReducers: {
 
-    [logout.fulfilled]: (state, action) => {
-      state.currentStatus = StatusValues.initial;
-      state.user = null;
-    },
-  }
-});
+        [login.pending]: (state, action) => {
+          if ([
+            StatusValues.initial,
+            StatusValues.loginSucceeded,
+            StatusValues.loginFailed].includes(state.currentStatus)
+          ) {
+            state.currentStatus = StatusValues.loginPending;
+          }
+        },
+
+        [login.fulfilled]: (state, action) => {
+          if ([StatusValues.loginPending].includes(state.currentStatus)) {
+            state.currentStatus = StatusValues.loginSucceeded;
+          }
+          state.user = action.payload;
+        },
+
+        [login.rejected]: (state, action) => {
+          if ([StatusValues.loginPending].includes(state.currentStatus)) {
+            state.currentStatus = StatusValues.loginFailed;
+            state.user = null;
+          }
+        },
+
+        [logout.fulfilled]: (state, action) => {
+          state.currentStatus = StatusValues.initial;
+          state.user = null;
+        },
+      }
+    })
+;
 
 export const selectAuth = state => state.auth;
 export {StatusValues};

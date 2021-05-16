@@ -12,7 +12,9 @@ function Login() {
         <div>
           <span>Login:</span>
 
-          <input onChange={e => setUsername(e.target.value)}/>
+          <input
+              onChange={e => setUsername(e.target.value)}/>
+
           <input type='password'
                  onChange={e => setPassword(e.target.value)}/>
 

@@ -9,13 +9,13 @@ function AuthHeader() {
 
   return (<div>
         {
-          auth.currentStatus === StatusValues.rejected ?
+          auth.currentStatus === StatusValues.loginFailed ?
               <span>Login failed!</span>
               :
               <span/>
         }
 
-        {auth.currentStatus === StatusValues.fulfilled ?
+        {auth.currentStatus === StatusValues.loginSucceeded ?
             <Logout/> :
             <Login/>
         }
