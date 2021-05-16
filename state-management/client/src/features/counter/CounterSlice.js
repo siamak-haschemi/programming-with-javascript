@@ -4,7 +4,7 @@ import {AuthStatus} from "../auth/AuthSlice";
 
 export const incrementByValue = createAsyncThunk(
     'counter/incrementByValue',
-    async (value, {getState, rejectWithValue}) => incrementByValueService(
+    (value, {getState, rejectWithValue}) => incrementByValueService(
         getState().auth.user.token,
         {value},
         rejectWithValue),
@@ -17,7 +17,7 @@ export const incrementByValue = createAsyncThunk(
 
 export const reset = createAsyncThunk(
     'counter/reset',
-    async (_, {getState, rejectWithValue}) => resetService(
+    (_, {getState, rejectWithValue}) => resetService(
         getState().auth.user.token,
         rejectWithValue),
     {

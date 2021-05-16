@@ -1,4 +1,4 @@
-export const loginService = (credentials, rejectWithValue) => {
+export const loginService = async (credentials, rejectWithValue) => {
 
   const requestOptions = {
     method: 'POST',
@@ -10,16 +10,16 @@ export const loginService = (credentials, rejectWithValue) => {
     body: JSON.stringify(credentials)
   };
 
-  return fetch(`http://localhost:4000/user/authenticate`, requestOptions)
-  .then(response => {
-    if (!response.ok) {
-      return rejectWithValue(response.data);
-    }
-    return response.json()
-  });
+  let response = await fetch(`http://localhost:4000/user/authenticate`,
+      requestOptions);
+
+  if (!response.ok) {
+    return rejectWithValue(response.data);
+  }
+  return response.json();
 };
 
-export const logoutService = (token, rejectWithValue) => {
+export const logoutService = async (token, rejectWithValue) => {
 
   const requestOptions = {
     method: 'POST',
@@ -29,11 +29,11 @@ export const logoutService = (token, rejectWithValue) => {
     }
   };
 
-  return fetch(`http://localhost:4000/user/logout`, requestOptions)
-  .then(response => {
-    if (!response.ok) {
-      return rejectWithValue(response.data);
-    }
-    return response.json()
-  });
+  let response = await fetch(`http://localhost:4000/user/logout`,
+      requestOptions);
+
+  if (!response.ok) {
+    return rejectWithValue(response.data);
+  }
+  return response.json();
 };

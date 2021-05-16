@@ -15,7 +15,7 @@ const AuthStatus = {
 
 export const login = createAsyncThunk(
     'auth/login',
-    async (credentials, {rejectWithValue}) => loginService(credentials,
+    (credentials, {rejectWithValue}) => loginService(credentials,
         rejectWithValue),
     {
       condition: (_, {getState}) => {
@@ -31,7 +31,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk(
     'auth/logout',
-    async (_, {getState, rejectWithValue}) => logoutService(
+    (_, {getState, rejectWithValue}) => logoutService(
         getState().auth.user.token,
         rejectWithValue),
     {

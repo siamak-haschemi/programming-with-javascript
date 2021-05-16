@@ -14,8 +14,8 @@ import {
 
 function Counter() {
   const auth = useSelector(selectAuth);
-  const dispatch = useDispatch();
   const counter = useSelector(selectCounter);
+  const dispatch = useDispatch();
 
   const renderSwitch = (currentStatus) => {
     switch (currentStatus) {

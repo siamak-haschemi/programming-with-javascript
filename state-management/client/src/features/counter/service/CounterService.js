@@ -1,4 +1,5 @@
-export const incrementByValueService = (token, value, rejectWithValue) => {
+export const incrementByValueService = async (token, value,
+    rejectWithValue) => {
 
   const requestOptions = {
     method: 'POST',
@@ -9,16 +10,16 @@ export const incrementByValueService = (token, value, rejectWithValue) => {
     body: JSON.stringify(value)
   };
 
-  return fetch(`http://localhost:4000/counter/incrementByValue`, requestOptions)
-  .then(response => {
-    if (!response.ok) {
-      return rejectWithValue(response.data);
-    }
-    return response.json()
-  });
+  let response = await fetch(`http://localhost:4000/counter/incrementByValue`,
+      requestOptions);
+
+  if (!response.ok) {
+    return rejectWithValue(response.data);
+  }
+  return response.json();
 };
 
-export const resetService = (token, rejectWithValue) => {
+export const resetService = async (token, rejectWithValue) => {
 
   const requestOptions = {
     method: 'POST',
@@ -28,11 +29,11 @@ export const resetService = (token, rejectWithValue) => {
     }
   };
 
-  return fetch(`http://localhost:4000/counter/reset`, requestOptions)
-  .then(response => {
-    if (!response.ok) {
-      return rejectWithValue(response.data);
-    }
-    return response.json()
-  });
+  let response = await fetch(`http://localhost:4000/counter/reset`,
+      requestOptions);
+
+  if (!response.ok) {
+    return rejectWithValue(response.data);
+  }
+  return response.json();
 };
