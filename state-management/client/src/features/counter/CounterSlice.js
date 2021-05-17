@@ -44,6 +44,5 @@ let counterSlice = createSlice({
 });
 
 export const selectCounter = state => state.counter;
-
 export default counterSlice.reducer;
 
