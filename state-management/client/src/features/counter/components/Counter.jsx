@@ -1,38 +1,20 @@
 import React from "react";
-import {useSelector, useDispatch} from "react-redux";
-
-import {
-  selectCounter,
-  incrementByValue,
-  reset,
-} from "../CounterSlice";
+import {useSelector} from "react-redux";
 
 import {
   selectAuth,
   AuthStatus
 } from "../../auth/AuthSlice";
 
+import CounterForm from "./CounterForm";
+
 function Counter() {
   const auth = useSelector(selectAuth);
-  const counter = useSelector(selectCounter);
-  const dispatch = useDispatch();
 
   const renderSwitch = (currentStatus) => {
     switch (currentStatus) {
       case AuthStatus.loginSucceeded:
-
-        return <div className="Counter">
-          <div>
-            <span>Current Value: {counter.value}</span>
-          </div>
-
-          <div>
-            <button onClick={() => dispatch(incrementByValue(1))}>+</button>
-            <button onClick={() => dispatch(incrementByValue(-1))}>-</button>
-            <button onClick={() => dispatch(reset())}>x</button>
-          </div>
-        </div>;
-
+        return <CounterForm/>;
       default:
         return <div>Please login!</div>;
     }

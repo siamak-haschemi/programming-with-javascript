@@ -23,7 +23,6 @@ module.exports = {
 };
 
 async function authenticate(req) {
-
   await sleep(2000);
 
   const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
@@ -38,8 +37,6 @@ async function authenticate(req) {
 
   // create a jwt token that is valid for 1 day
   const token = jwt.sign({sub: user.id}, config.secret, {expiresIn: '1d'});
-
-
 
   return {
     ...omitPassword(user),

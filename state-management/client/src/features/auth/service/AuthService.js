@@ -10,7 +10,7 @@ export const loginService = async (credentials, rejectWithValue) => {
     body: JSON.stringify(credentials)
   };
 
-  let response = await fetch(`http://localhost:4000/user/authenticate`,
+  let response = await fetch(`http://localhost:4000/auth/authenticate`,
       requestOptions);
 
   if (!response.ok) {
@@ -29,7 +29,7 @@ export const logoutService = async (token, rejectWithValue) => {
     }
   };
 
-  let response = await fetch(`http://localhost:4000/user/logout`,
+  let response = await fetch(`http://localhost:4000/auth/logout`,
       requestOptions);
 
   if (!response.ok) {

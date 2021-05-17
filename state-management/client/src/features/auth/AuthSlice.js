@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import {loginService, logoutService} from "./service/UserService";
+import {loginService, logoutService} from "./service/AuthService";
 
 const AuthStatus = {
   initial: 'initial',
@@ -50,30 +50,33 @@ let authSlice = createSlice({
         currentStatus: AuthStatus.initial,
         user: null
       },
-      extraReducers: {
+      extraReducers: (builder) => {
+        builder
 
-        [login.pending]: (state, action) => {
+        // login cases
+        .addCase(login.pending, (state, action) => {
           state.currentStatus = AuthStatus.loginPending;
-        },
-        [login.fulfilled]: (state, action) => {
+        })
+        .addCase(login.fulfilled, (state, action) => {
           state.currentStatus = AuthStatus.loginSucceeded;
           state.user = action.payload;
-        },
-        [login.rejected]: (state, action) => {
+        })
+        .addCase(login.rejected, (state, action) => {
           state.currentStatus = AuthStatus.loginFailed;
           state.user = null;
-        },
+        })
 
-        [logout.pending]: (state, action) => {
+        // logout cases
+        .addCase(logout.pending, (state, action) => {
           state.currentStatus = AuthStatus.logoutPending;
-        },
-        [logout.fulfilled]: (state, action) => {
+        })
+        .addCase(logout.fulfilled, (state, action) => {
           state.currentStatus = AuthStatus.logoutSucceeded;
           state.user = null;
-        },
-        [logout.rejected]: (state, action) => {
+        })
+        .addCase(logout.rejected, (state, action) => {
           state.currentStatus = AuthStatus.logoutFailed;
-        },
+        })
       }
     })
 ;
