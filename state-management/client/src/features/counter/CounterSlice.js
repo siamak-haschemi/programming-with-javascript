@@ -32,13 +32,14 @@ let counterSlice = createSlice({
   initialState: {
     value: null
   },
-  extraReducers: {
-    [incrementByValue.fulfilled]: (state, action) => {
+  extraReducers: (builder) => {
+    builder
+    .addCase(incrementByValue.fulfilled, (state, action) => {
       state.value = action.payload.value;
-    },
-    [reset.fulfilled]: (state, action) => {
+    })
+    .addCase(reset.fulfilled, (state, action) => {
       state.value = action.payload.value;
-    },
+    })
   }
 });
 
