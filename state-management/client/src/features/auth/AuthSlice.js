@@ -59,7 +59,7 @@ let authSlice = createSlice({
         })
         .addCase(login.fulfilled, (state, action) => {
           state.currentStatus = AuthStatus.loginSucceeded;
-          state.user = action.payload;
+          state.user = action.payload; // <--- json web token
         })
         .addCase(login.rejected, (state, action) => {
           state.currentStatus = AuthStatus.loginFailed;
